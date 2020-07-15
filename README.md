@@ -24,7 +24,7 @@ Wechaty QnAMaker Plugin helps you to answer questions in WeChat with the power o
 1. Node.js v12+
 1. Wechaty v0.40+
 1. This QnAMaker Plugin
-1. Azure Subscription for Congnitive Service
+1. Azure Subscription for Cognitive Service
 1. QnAMaker Knowledge Base (KB)
 
 ## Usage
@@ -33,7 +33,7 @@ Wechaty QnAMaker Plugin helps you to answer questions in WeChat with the power o
 import { WechatyQnAMaker } from 'wechaty-plugin-qnamaker'
 
 const config = {
-  at: true, // default true: require at the bot in room.
+  mention: true, // default true: require mention the bot in room.
   room: true,
   contact: true, // enable direct message.
 
@@ -72,6 +72,7 @@ wechaty.use(QnAMakerPlugin)
 
 1. `config.contact`: Whether to allow direct message to be sync with ticket reply. `false` to deny all, `true` for allow all; Supports contact id(`string`) and contact name(`RegExp`). You can also mix them in array.
 1. `config.room`: The room id of your service WeChat room.
+1. `config.mention`: Whether require the message mention the bot.
 1. `config.skipMessage`: If set it to `string` or `RegExp`, then the message text that match the config will not be processed by the plugin. Array supported.
 
 ## Environment Variables
