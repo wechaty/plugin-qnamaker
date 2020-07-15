@@ -3,15 +3,15 @@ import {
   log,
 }           from 'wechaty'
 
-function atMatcher (at: boolean) {
-  log.verbose('WechatyQnAMaker', 'atMatcher(%s)', at)
+function mentionMatcher (mention: boolean) {
+  log.verbose('WechatyQnAMaker', 'mentionMatcher(%s)', mention)
 
-  return async function matchAt (message: Message): Promise<boolean> {
+  return async function matchMention (message: Message): Promise<boolean> {
     const room = message.room()
 
     if (!room)                            { return false }
 
-    if (at) {
+    if (mention) {
       if (!await message.mentionSelf())   { return false }
     }
 
@@ -19,4 +19,4 @@ function atMatcher (at: boolean) {
   }
 }
 
-export { atMatcher }
+export { mentionMatcher }

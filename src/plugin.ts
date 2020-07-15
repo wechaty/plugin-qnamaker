@@ -10,14 +10,14 @@ import {
 
 import { asker }            from './asker'
 import { normalizeConfig }  from './normalize-config'
-import { atMatcher }        from './at-matcher'
+import { mentionMatcher }        from './mention-matcher'
 
 const DEFAULT_MIN_SCORE = 70
 
 export interface WechatyQnAMakerConfig {
   contact?     : matchers.ContactMatcherOptions,
   room?        : matchers.RoomMatcherOptions,
-  at?          : boolean,
+  mention?     : boolean,
   language?    : matchers.LanguageMatcherOptions,
   skipMessage? : matchers.MessageMatcherOptions,
   minScore?: number,
@@ -57,9 +57,9 @@ function WechatyQnAMaker (config: WechatyQnAMakerConfig): WechatyPlugin {
     ? () => false // default not skip any messages
     : matchers.messageMatcher(config.skipMessage)
 
-  const matchAt = (typeof config.at === 'undefined')
-    ? atMatcher(true) // default: true
-    : atMatcher(config.at)
+  const matchMention = (typeof config.mention === 'undefined')
+    ? mentionMatcher(true) // default: true
+    : mentionMatcher(config.mention)
 
   const matchLanguage = (typeof config.language === 'undefined')
     ? () => true  // match all language by default
@@ -85,7 +85,7 @@ function WechatyQnAMaker (config: WechatyQnAMakerConfig): WechatyPlugin {
 
     if (room) {
       if (!await matchRoom(room))                         { return false }
-      if (!await matchAt(message))                        { return false }
+      if (!await matchMention(message))                        { return false }
 
       /**
        * Mention others but not include the bot
