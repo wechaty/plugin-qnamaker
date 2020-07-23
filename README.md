@@ -108,7 +108,11 @@ Our Friday BOT are using `wechaty-qnamaker` to connect our WeChat conversations 
 
 ### master
 
-### v0.2 (Jun 29, 2020)
+### v0.4 (July 23, 2020)
+
+1. Rename from `wechaty-plugin-qnamaker` to `wechaty-qnamaker`
+
+### v0.2 (June 29, 2020)
 
 1. Init code base
 1. QnAMaker integration
