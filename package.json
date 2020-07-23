@@ -64,7 +64,7 @@
     }
   },
   "publishConfig": {
-    "tag": "next"
+    "tag": "latest"
   },
   "homepage": "https://github.com/wechaty/wechaty-plugin-qnamaker#readme"
 }
