@@ -1,5 +1,5 @@
 {
-  "name": "wechaty-plugin-qnamaker",
+  "name": "wechaty-qnamaker",
   "version": "0.4.4",
   "description": "QnAMaker.ai Plugin for Wechaty",
   "directories": {
@@ -44,7 +44,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wechaty/wechaty-plugin-qnamaker.git"
+    "url": "git+https://github.com/wechaty/wechaty-qnamaker.git"
   },
   "keywords": [
     "wechaty",
@@ -56,7 +56,7 @@
   "author": "Huan LI <zixia@zixia.net>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/wechaty/wechaty-plugin-qnamaker/issues"
+    "url": "https://github.com/wechaty/wechaty-qnamaker/issues"
   },
   "git": {
     "scripts": {
@@ -64,7 +64,7 @@
     }
   },
   "publishConfig": {
-    "tag": "latest"
+    "tag": "next"
   },
-  "homepage": "https://github.com/wechaty/wechaty-plugin-qnamaker#readme"
+  "homepage": "https://github.com/wechaty/wechaty-qnamaker#readme"
 }
