@@ -13,6 +13,14 @@ Wechaty QnAMaker Plugin can be used to find the most appropriate answer for WeCh
 [![Powered by Wechaty](https://img.shields.io/badge/Powered%20By-Wechaty-brightgreen.svg)](https://github.com/Wechaty/wechaty)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-blue.svg)](https://www.typescriptlang.org/)
 
+## RENAMED TO: [wechaty-qnamaker](https://www.npmjs.com/package/wechaty-qnamaker)
+
+This module has been renamed from `wechaty-plugin-qnamaker` to [wechaty-qnamaker](https://www.npmjs.com/package/wechaty-qnamaker).
+
+Please use the new name for later versions.
+
+## RENAMED TO: [wechaty-qnamaker](https://www.npmjs.com/package/wechaty-qnamaker)
+
 ## Introduction
 
 Wechaty QnAMaker Plugin helps you to answer questions in WeChat with the power of <https://QnAMaker.ai>.
