@@ -5,7 +5,7 @@
  * Azure-Samples/cognitive-services-quickstart-code
  *  https://github.com/Azure-Samples/cognitive-services-quickstart-code/blob/master/javascript/QnAMaker/sdk/qnamaker_quickstart.js
  */
-import * as msRest from '@azure/ms-rest-js'
+import * as msRest  from '@azure/ms-rest-js'
 import * as runtime from '@azure/cognitiveservices-qnamaker-runtime'
 
 import { log } from 'wechaty'
@@ -54,11 +54,23 @@ function asker (options: QnAMakerOptions) {
       const answer = answers[0].answer
       const score  = answers[0].score
 
-      log.verbose('WechatyQnAMaker', 'ask(%s) score=%s for answer %s', question, score, answer)
-
       if (score && score > options.minScore) {
+        log.verbose('WechatyQnAMaker', 'ask(%s) PASS score/min = %s/%s > 1 for answer %s',
+          question,
+          score,
+          options.minScore,
+          answer,
+        )
         return answer
       }
+
+      log.verbose('WechatyQnAMaker', 'ask(%s) SKIP score/min = %s/%s < 1 for answer %s',
+        question,
+        score,
+        options.minScore,
+        answer,
+      )
+
     }
 
   }
