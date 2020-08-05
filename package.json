@@ -11,7 +11,8 @@
     "@azure/cognitiveservices-qnamaker-runtime": "^1.0.0",
     "@azure/ms-rest-js": "^2.0.7",
     "language-monitor": "^1.0.3",
-    "wechaty-plugin-contrib": "^0.14.2"
+    "wechaty-plugin-contrib": "^0.14.2",
+    "wechaty-vorpal": "^0.6.11"
   },
   "devDependencies": {
     "@chatie/eslint-config": "^0.12.1",

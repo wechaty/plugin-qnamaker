@@ -13,14 +13,11 @@ test('asker()', async t => {
   // const knowledgeBaseId = process.env.WECHATY_PLUGIN_QNAMAKER_KNOWLEDGE_BASE_ID
 
   const config = normalizeConfig({})
-  const ask = asker({
-    ...config,
-    minScore: 50,
-  })
+  const ask = asker(config)
 
-  let answer = await ask('wechaty')
-  t.true(answer, 'should get answer back: ' + answer)
+  let answers = await ask('wechaty')
+  t.true(answers[0].answer, 'should get answer back: ' + answers[0].answer)
 
-  answer = await ask('中文')
-  t.false(answer, 'should get no answer for 中文')
+  answers = await ask('中文')
+  t.equal(answers.length, 0, 'should get no answer for 中文')
 })

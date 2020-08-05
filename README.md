@@ -41,7 +41,7 @@ const config = {
    * Language of Questions & Score of Answers
    */
   language: 'english',
-  minScore: 50,   // minimum score for the answer
+  scoreThreshold: 50,   // minimum score for the answer
 
   /**
    * QnAMaker Service API
@@ -66,7 +66,7 @@ wechaty.use(QnAMakerPlugin)
 ### 2 Language of Questions & Score of Answers
 
 1. `config.language`: If set to a language ('chinese', 'english', etc), then the plugin will only reply message text in that specified language. (default: match all languages)
-1. `config.minScore`: If the answer from QnAMaker.ai service has a score below the `minScore`, then that answer will not be used. (A perfect score is `100`)
+1. `config.scoreThreshold`: If the answer from QnAMaker.ai service has a score below the `scoreThreshold`, then that answer will not be used. (A perfect score is `100`)
 
 ### 3 Matchers & Skipper
 
@@ -107,6 +107,11 @@ Our Friday BOT are using `wechaty-qnamaker` to connect our WeChat conversations 
 ## History
 
 ### master
+
+### v0.5 (Aut 5, 2020)
+
+1. Add Vorpal command: `faq`
+1. Rename `minScore` to `scoreThreshold` in `configOptions`.
 
 ### v0.4 (July 23, 2020)
 

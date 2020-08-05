@@ -1,6 +1,10 @@
-import { WechatyQnAMakerConfig } from './plugin'
+import { WechatyQnAMakerConfig }  from './plugin'
+import {
+  QnAMakerOptions,
+  DEFAULT_SCORE_THRESHOLD,
+}                                 from './qnamaker'
 
-function normalizeConfig (config: WechatyQnAMakerConfig) {
+function normalizeConfig (config: WechatyQnAMakerConfig): QnAMakerOptions {
   const WECHATY_PLUGIN_QNAMAKER_ENDPOINT_KEY      = 'WECHATY_PLUGIN_QNAMAKER_ENDPOINT_KEY'
   const WECHATY_PLUGIN_QNAMAKER_KNOWLEDGE_BASE_ID = 'WECHATY_PLUGIN_QNAMAKER_KNOWLEDGE_BASE_ID'
   const WECHATY_PLUGIN_QNAMAKER_RESOURCE_NAME     = 'WECHATY_PLUGIN_QNAMAKER_RESOURCE_NAME'
@@ -37,10 +41,13 @@ function normalizeConfig (config: WechatyQnAMakerConfig) {
     `)
   }
 
+  const scoreThreshold = config.scoreThreshold ?? DEFAULT_SCORE_THRESHOLD
+
   return {
     endpointKey,
     knowledgeBaseId,
     resourceName,
+    scoreThreshold,
   }
 
 }

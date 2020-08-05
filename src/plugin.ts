@@ -12,38 +12,25 @@ import { asker }            from './asker'
 import { normalizeConfig }  from './normalize-config'
 import { mentionMatcher }        from './mention-matcher'
 
-const DEFAULT_MIN_SCORE = 70
+import { QnAMakerOptions } from './qnamaker'
 
-export interface WechatyQnAMakerConfig {
-  contact?     : matchers.ContactMatcherOptions,
-  room?        : matchers.RoomMatcherOptions,
-  mention?     : boolean,
-  language?    : matchers.LanguageMatcherOptions,
-  skipMessage? : matchers.MessageMatcherOptions,
-  minScore?: number,
-
-  endpointKey?     : string,
-  knowledgeBaseId? : string,
-  resourceName?    : string,
+interface WechatyQnAMakerConfigMatcher {
+  contact?        : matchers.ContactMatcherOptions,
+  room?           : matchers.RoomMatcherOptions,
+  mention?        : boolean,
+  language?       : matchers.LanguageMatcherOptions,
+  skipMessage?    : matchers.MessageMatcherOptions,
+  scoreThreshold? : number,
 }
+
+export type WechatyQnAMakerConfig = WechatyQnAMakerConfigMatcher & Partial<QnAMakerOptions>
 
 function WechatyQnAMaker (config: WechatyQnAMakerConfig): WechatyPlugin {
   log.verbose('WechatyQnAMaker', 'WechatyQnAMaker(%s)', JSON.stringify(config))
 
-  const {
-    endpointKey,
-    knowledgeBaseId,
-    resourceName,
-  }                   = normalizeConfig(config)
+  const normalizedConfig = normalizeConfig(config)
 
-  const minScore = config.minScore ?? DEFAULT_MIN_SCORE
-
-  const ask = asker({
-    endpointKey,
-    knowledgeBaseId,
-    minScore,
-    resourceName,
-  })
+  const ask = asker(normalizedConfig)
 
   const matchContact = typeof config.contact === 'undefined'
     ? () => true
@@ -125,8 +112,13 @@ function WechatyQnAMaker (config: WechatyQnAMakerConfig): WechatyPlugin {
       const text = await message.mentionText()
       if (!text) { return }
 
-      const answer = await ask(text)
-      if (!answer) { return }
+      const answers = await ask(text)
+      if (answers.length <= 0) { return }
+
+      const answer = answers[0].answer
+      if (!answer) {
+        throw new Error('no answer?')
+      }
 
       const from = message.from()
       const room = message.room()

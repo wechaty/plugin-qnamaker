@@ -10,12 +10,8 @@ import * as runtime from '@azure/cognitiveservices-qnamaker-runtime'
 
 import { log } from 'wechaty'
 
-interface QnAMakerOptions {
-  endpointKey     : string,
-  knowledgeBaseId : string,
-  resourceName    : string,
-  minScore        : number,
-}
+import { QnAMakerOptions } from './qnamaker'
+import { QueryDTO } from '@azure/cognitiveservices-qnamaker-runtime/esm/models'
 
 function asker (options: QnAMakerOptions) {
   log.verbose('WechatyQnAMaker', 'asker(%s)', JSON.stringify(options))
@@ -28,51 +24,29 @@ function asker (options: QnAMakerOptions) {
   })
   const runtimeClient = new runtime.QnAMakerRuntimeClient(queryRuntimeCredentials, queryingURL)
 
-  return async function ask (question: string): Promise<void | string> {
-    log.verbose('WechatyQnAMaker', 'ask(%s)', question)
+  return async function ask (
+    question : string,
+    dto      : QueryDTO = {},
+  ): Promise<runtime.QnAMakerRuntimeModels.QnASearchResult[]> {
+    log.verbose('WechatyQnAMaker', 'ask(%s, %s)', question, JSON.stringify(dto))
+
+    const normalizedQueryDto: QueryDTO = {
+      scoreThreshold : options.scoreThreshold,
+      ...dto,
+      question,
+    }
+
+    log.verbose('WechatyQnAMaker', 'ask() normalizedQueryDto: %s', JSON.stringify(normalizedQueryDto))
 
     const requestQuery = await runtimeClient.runtime.generateAnswer(
       options.knowledgeBaseId,
-      {
-        question,
-        // strictFilters: [
-        //   {
-        //     name: 'Category',
-        //     value: 'api',
-        //   },
-        // ],
-        top: 1,
-      },
+      normalizedQueryDto,
       { customHeaders }
     )
     // console.info(JSON.stringify(requestQuery))
 
-    const answers = requestQuery.answers
-
-    if (answers && answers.length > 0) {
-
-      const answer = answers[0].answer
-      const score  = answers[0].score
-
-      if (score && score > options.minScore) {
-        log.verbose('WechatyQnAMaker', 'ask(%s) PASS score/min = %s/%s > 1 for answer %s',
-          question,
-          score,
-          options.minScore,
-          answer,
-        )
-        return answer
-      }
-
-      log.verbose('WechatyQnAMaker', 'ask(%s) SKIP score/min = %s/%s < 1 for answer %s',
-        question,
-        score,
-        options.minScore,
-        answer,
-      )
-
-    }
-
+    const answers = requestQuery.answers || []
+    return answers.filter(item => item.score)
   }
 
 }
