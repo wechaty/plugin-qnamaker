@@ -1,6 +1,6 @@
 {
   "name": "wechaty-qnamaker",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "QnAMaker.ai Plugin for Wechaty",
   "directories": {
     "doc": "docs",
@@ -11,8 +11,10 @@
     "@azure/cognitiveservices-qnamaker-runtime": "^1.0.0",
     "@azure/ms-rest-js": "^2.0.7",
     "language-monitor": "^1.0.3",
-    "wechaty-plugin-contrib": "^0.14.2",
-    "wechaty-vorpal": "^0.6.11"
+    "wechaty-plugin-contrib": "^0.14.2"
+  },
+  "peerDependencies": {
+    "wechaty-vorpal": "*"
   },
   "devDependencies": {
     "@chatie/eslint-config": "^0.12.1",
@@ -25,6 +27,7 @@
     "shx": "^0.3.2",
     "tstest": "^0.4.10",
     "wechaty": "^0.46.2",
+    "wechaty-vorpal": "^0.6.11",
     "wechaty-puppet-mock": "^0.22.31"
   },
   "main": "dist/src/mod.js",

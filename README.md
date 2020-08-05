@@ -1,4 +1,4 @@
-# wechaty-qnamaker
+# WECHATY-QNAMAKER
 
 [![NPM Version](https://img.shields.io/npm/v/wechaty-qnamaker?color=brightgreen)](https://www.npmjs.com/package/wechaty-qnamaker)
 [![NPM](https://github.com/wechaty/wechaty-qnamaker/workflows/NPM/badge.svg)](https://github.com/wechaty/wechaty-qnamaker/actions?query=workflow%3ANPM)
@@ -13,13 +13,13 @@ Wechaty QnAMaker can be used to find the most appropriate answer for WeChat user
 [![Powered by Wechaty](https://img.shields.io/badge/Powered%20By-Wechaty-brightgreen.svg)](https://github.com/Wechaty/wechaty)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-blue.svg)](https://www.typescriptlang.org/)
 
-## Introduction
+## INTRODUCTION
 
 Wechaty QnAMaker Plugin helps you to answer questions in WeChat with the power of <https://QnAMaker.ai>.
 
 ![QnAMaker for Wechaty Community Knowledge Base](docs/images/qnamaker-screenshot.png)
 
-## Requirements
+## REQUIREMENTS
 
 1. Node.js v12+
 1. Wechaty v0.40+
@@ -27,7 +27,9 @@ Wechaty QnAMaker Plugin helps you to answer questions in WeChat with the power o
 1. Azure Subscription for Cognitive Service
 1. QnAMaker Knowledge Base (KB)
 
-## Usage
+## USAGE
+
+To use the plugin:
 
 ```ts
 import { WechatyQnAMaker } from 'wechaty-qnamaker'
@@ -57,6 +59,34 @@ const wechaty = new Wechaty()
 wechaty.use(QnAMakerPlugin)
 ```
 
+We also provide a Vorpal Command:
+
+```ts
+import {
+  WechatyVorpal,
+  WechatyVorpalConfig,
+}                        from 'wechaty-vorpal'
+import { Faq  }           from 'wechaty-qnamaker'
+
+const vorpalConfig: WechatyVorpalConfig = {
+  contact : true,
+  mention : true,
+  room    : true,
+  silent  : true,
+
+  use: [
+    Faq(configCeibs),
+  ],
+}
+
+const VorpalPlugin = WechatyVorpal(vorpalConfig)
+
+const wechaty = new Wechaty()
+wechaty.use(VorpalPlugin)
+```
+
+![QnAMaker Wechaty Vorpal FAQ Command](docs/images/qnamaker-vorpal-faq.jpg)
+
 ### 1 Configure QnAMaker
 
 1. `endpointKey`: Endpoint Key for QnAMaker.ai
@@ -75,7 +105,7 @@ wechaty.use(QnAMakerPlugin)
 1. `config.mention`: Whether require the message mention the bot.
 1. `config.skipMessage`: If set it to `string` or `RegExp`, then the message text that match the config will not be processed by the plugin. Array supported.
 
-## Environment Variables
+## ENVIRONMENT VARIABLES
 
 The following two environment variables will be used if the required information is not provided by the config.
 
@@ -91,7 +121,7 @@ The following two environment variables will be used if the required information
 
 `process.env.WECHATY_PLUGIN_QNAMAKER_RESOURCE_NAME` will be used if the `config.resourceName` is not provided.
 
-## Example
+## EXAMPLE
 
 Our Friday BOT are using `wechaty-qnamaker` to connect our WeChat conversations with QnAMaker.
 
@@ -100,15 +130,15 @@ Our Friday BOT are using `wechaty-qnamaker` to connect our WeChat conversations 
 
 > Note: our question & answer pairs sheet are open to edit. Please feel free to add question & answer pair if you believe it's necessary, and thank you for your contribution!
 
-## Resources
+## RESOURCES
 
 - [Quickstart: Test knowledge base with batch questions and expected answers](https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/quickstarts/batch-testing)
 
-## History
+## HISTORY
 
 ### master
 
-### v0.5 (Aut 5, 2020)
+### v0.6 (Aut 5, 2020)
 
 1. Add Vorpal command: `faq`
 1. Rename `minScore` to `scoreThreshold` in `configOptions`.
@@ -123,7 +153,7 @@ Our Friday BOT are using `wechaty-qnamaker` to connect our WeChat conversations 
 1. QnAMaker integration
 1. Add Language Detecter to limit the plugin to only answer a specific language(s)
 
-## Contributors
+## CONTRIBUTORS
 
 [![contributor](https://sourcerer.io/fame/huan/wechaty/wechaty-qnamaker/images/0)](https://sourcerer.io/fame/huan/wechaty/wechaty-qnamaker/links/0)
 [![contributor](https://sourcerer.io/fame/huan/wechaty/wechaty-qnamaker/images/1)](https://sourcerer.io/fame/huan/wechaty/wechaty-qnamaker/links/1)
@@ -134,14 +164,14 @@ Our Friday BOT are using `wechaty-qnamaker` to connect our WeChat conversations 
 [![contributor](https://sourcerer.io/fame/huan/wechaty/wechaty-qnamaker/images/6)](https://sourcerer.io/fame/huan/wechaty/wechaty-qnamaker/links/6)
 [![contributor](https://sourcerer.io/fame/huan/wechaty/wechaty-qnamaker/images/7)](https://sourcerer.io/fame/huan/wechaty/wechaty-qnamaker/links/7)
 
-## Author
+## AUTHOR
 
 [Huan LI](https://github.com/huan) ([李卓桓](http://linkedin.com/in/zixia)),
 Microsoft Regional Director & AI MVP, \<zixia@zixia.net\>
 
 [![Profile of Huan LI (李卓桓) on StackOverflow](https://stackexchange.com/users/flair/265499.png)](https://stackexchange.com/users/265499)
 
-## Copyright & License
+## COPYRIGHT & LICENSE
 
 - Code & Docs © 2020 Huan LI \<zixia@zixia.net\>
 - Code released under the Apache-2.0 License
