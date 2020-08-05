@@ -9,6 +9,8 @@ function normalizeConfig (config: WechatyQnAMakerConfig): QnAMakerOptions {
   const WECHATY_PLUGIN_QNAMAKER_KNOWLEDGE_BASE_ID = 'WECHATY_PLUGIN_QNAMAKER_KNOWLEDGE_BASE_ID'
   const WECHATY_PLUGIN_QNAMAKER_RESOURCE_NAME     = 'WECHATY_PLUGIN_QNAMAKER_RESOURCE_NAME'
 
+  const language = config.language
+
   let endpointKey     = config.endpointKey
   let knowledgeBaseId = config.knowledgeBaseId
   let resourceName    = config.resourceName
@@ -46,6 +48,7 @@ function normalizeConfig (config: WechatyQnAMakerConfig): QnAMakerOptions {
   return {
     endpointKey,
     knowledgeBaseId,
+    language,
     resourceName,
     scoreThreshold,
   }

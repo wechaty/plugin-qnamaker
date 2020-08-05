@@ -10,8 +10,11 @@ import {
 
 import { QnAMakerOptions } from './qnamaker'
 import { normalizeConfig } from './normalize-config'
-import { asker } from './asker'
-import { QnASearchResult, QueryDTO } from '@azure/cognitiveservices-qnamaker-runtime/esm/models'
+import { asker }           from './asker'
+import {
+  QnASearchResult,
+  QueryDTO,
+}                         from '@azure/cognitiveservices-qnamaker-runtime/esm/models'
 
 function Faq (config: Partial<QnAMakerOptions> | Partial<QnAMakerOptions>[]) {
   log.verbose('WechatyQnAMaker', 'Faq(%s)', JSON.stringify(config))
@@ -52,11 +55,14 @@ const faqAction = (configList : QnAMakerOptions[]) => {
       : matchers.languageMatcher(config.language),
   }))
 
-  const askAll = async (...args: Parameters<ReturnType<typeof asker>>) => {
+  const askAll = async (
+    question : string,
+    dto      : QueryDTO = {},
+  ) => {
     const resultList = await Promise.all(
       askerDictList
-        .filter(dict => dict.matchLanguage(args[0]))
-        .map(dict => dict.ask(...args))
+        .filter(dict => dict.matchLanguage(question))
+        .map(dict => dict.ask(question, dto))
     )
 
     return resultList
@@ -85,18 +91,23 @@ const faqAction = (configList : QnAMakerOptions[]) => {
       top            : options.number,
     }
 
-    const answers = await askAll(question, queryDto)
+    const searchResultList = await askAll(question, queryDto)
 
-    if (answers.length <= 0) {
+    if (searchResultList.length <= 0) {
       this.log('Sorry, I did not find any answer in my KB (Knowledge Base) for your question: "' + question + '".')
       return
     }
 
-    log.verbose('WechatyQnAMaker', 'Faq() faqAction() faqActionExecutor() found %s answers', answers.length)
+    log.verbose('WechatyQnAMaker', 'Faq() faqAction() faqActionExecutor() found %s answers', searchResultList.length)
 
-    answers.forEach((result, idx) => result.answer && this.log(
-      toReply(result, idx + 1, options.verbose)
-    ))
+    searchResultList.forEach((result, idx) => {
+      if (!result.answer)               { return }
+      if (idx > (options.number ?? 0))  { return }
+
+      this.log(
+        toReply(result, idx + 1, options.verbose)
+      )
+    })
   }
 
 }

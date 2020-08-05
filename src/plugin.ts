@@ -18,9 +18,7 @@ interface WechatyQnAMakerConfigMatcher {
   contact?        : matchers.ContactMatcherOptions,
   room?           : matchers.RoomMatcherOptions,
   mention?        : boolean,
-  language?       : matchers.LanguageMatcherOptions,
   skipMessage?    : matchers.MessageMatcherOptions,
-  scoreThreshold? : number,
 }
 
 export type WechatyQnAMakerConfig = WechatyQnAMakerConfigMatcher & Partial<QnAMakerOptions>
