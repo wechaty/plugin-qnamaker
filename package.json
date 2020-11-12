@@ -28,7 +28,7 @@
     "tstest": "^0.4.10",
     "wechaty": "^0.48.0",
     "wechaty-vorpal": "^0.6.11",
-    "wechaty-puppet-mock": "^0.22.31"
+    "wechaty-puppet-mock": "^0.28.2"
   },
   "main": "dist/src/mod.js",
   "typings": "dist/src/mod.d.ts",
