@@ -2,6 +2,7 @@
 
 [![NPM Version](https://img.shields.io/npm/v/wechaty-qnamaker?color=brightgreen)](https://www.npmjs.com/package/wechaty-qnamaker)
 [![NPM](https://github.com/wechaty/wechaty-qnamaker/workflows/NPM/badge.svg)](https://github.com/wechaty/wechaty-qnamaker/actions?query=workflow%3ANPM)
+[![ES Modules](https://img.shields.io/badge/ES-Modules-brightgreen)](https://github.com/Chatie/tsconfig/issues/16)
 
 [QnA Maker](https://qnamaker.ai) is a cloud-based Natural Language Processing (NLP) service that easily creates a natural conversational layer over your data.
 
