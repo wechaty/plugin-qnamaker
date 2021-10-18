@@ -1,8 +1,8 @@
-import { WechatyQnAMakerConfig }  from './plugin'
+import type { WechatyQnAMakerConfig }  from './plugin.js'
 import {
   QnAMakerOptions,
   DEFAULT_SCORE_THRESHOLD,
-}                                 from './qnamaker'
+}                                 from './qnamaker.js'
 
 function normalizeConfig (config: WechatyQnAMakerConfig): QnAMakerOptions {
   const WECHATY_PLUGIN_QNAMAKER_ENDPOINT_KEY      = 'WECHATY_PLUGIN_QNAMAKER_ENDPOINT_KEY'

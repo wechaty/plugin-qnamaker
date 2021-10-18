@@ -1,5 +1,5 @@
 import { log }        from 'wechaty'
-import {
+import type {
   Args,
   CommandContext,
   Vorpal,
@@ -8,12 +8,13 @@ import {
   matchers,
 }                    from 'wechaty-plugin-contrib'
 
-import { QnAMakerOptions } from './qnamaker'
-import { normalizeConfig } from './normalize-config'
-import { asker }           from './asker'
-import {
+import type { QnAMakerOptions } from './qnamaker.js'
+import { normalizeConfig } from './normalize-config.js'
+import { asker }           from './asker.js'
+import type {
   QnASearchResult,
   QueryDTO,
+  // eslint-disable-next-line
 }                         from '@azure/cognitiveservices-qnamaker-runtime/esm/models'
 
 function Faq (config: Partial<QnAMakerOptions> | Partial<QnAMakerOptions>[]) {
@@ -25,7 +26,7 @@ function Faq (config: Partial<QnAMakerOptions> | Partial<QnAMakerOptions>[]) {
     normalizedConfigList.push(normalizeConfig(config))
   } else {
     normalizedConfigList.push(
-      ...config.map(c => normalizeConfig(c))
+      ...config.map(c => normalizeConfig(c)),
     )
   }
 
@@ -62,7 +63,7 @@ const faqAction = (configList : QnAMakerOptions[]) => {
     const resultList = await Promise.all(
       askerDictList
         .filter(dict => dict.matchLanguage(question))
-        .map(dict => dict.ask(question, dto))
+        .map(dict => dict.ask(question, dto)),
     )
 
     return resultList
@@ -73,17 +74,17 @@ const faqAction = (configList : QnAMakerOptions[]) => {
 
   return async function faqActionExector (
     this: CommandContext,
-    args: Args
+    args: Args,
   ): Promise<void> {
     log.verbose('WechatyQnAMaker', 'Faq() faqAction() faqActionExecutor("%s")', JSON.stringify(args))
 
     const options: FaqOptions = args.options
 
     let question: string
-    if (Array.isArray(args.question)) {
-      question = args.question.join(' ')
+    if (Array.isArray(args['question'])) {
+      question = args['question'].join(' ')
     } else {
-      question = args.question
+      question = args['question']!
     }
 
     const queryDto: QueryDTO = {
@@ -105,7 +106,7 @@ const faqAction = (configList : QnAMakerOptions[]) => {
       if (idx > (options.number ?? 0))  { return }
 
       this.log(
-        toReply(result, idx + 1, options.verbose)
+        toReply(result, idx + 1, options.verbose),
       )
     })
   }

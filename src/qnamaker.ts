@@ -1,4 +1,4 @@
-import { matchers } from 'wechaty-plugin-contrib'
+import type { matchers } from 'wechaty-plugin-contrib'
 
 export interface QnAMakerOptions {
   endpointKey     : string

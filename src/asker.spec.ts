@@ -1,9 +1,9 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env -S node --no-warnings --loader ts-node/esm
 
-import test  from 'tstest'
+import { test }  from 'tstest'
 
-import { asker } from './asker'
-import { normalizeConfig } from './normalize-config'
+import { asker } from './asker.js'
+import { normalizeConfig } from './normalize-config.js'
 
 test('asker()', async t => {
   // use our normalizeConfig() helper function to get the config:
@@ -16,7 +16,7 @@ test('asker()', async t => {
   const ask = asker(config)
 
   let answers = await ask('wechaty')
-  t.true(answers[0].answer, 'should get answer back: ' + answers[0].answer)
+  t.ok(answers[0]!.answer, 'should get answer back: ' + answers[0]!.answer)
 
   answers = await ask('中文')
   t.equal(answers.length, 0, 'should get no answer for 中文')

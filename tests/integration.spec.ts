@@ -1,10 +1,10 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env -S node --no-warnings --loader ts-node/esm
 
 import {
   test,
 }             from 'tstest'
 
-import * as plugins             from '../src/mod'
+import * as plugins             from '../src/mod.js'
 
 // import {
 //   Wechaty,
@@ -25,7 +25,7 @@ test('integration testing', async (t) => {
   //   room: 'id',
   //   webhookProxyUrl: 'https://smee.io/fdasfadsfasdfs',
   // }))
-  t.skip('should get a bot')
+  await t.skip('should get a bot')
 })
 
 test('plugin name', async t => {
@@ -38,7 +38,7 @@ test('plugin name', async t => {
       continue  // our helper functions
     }
 
-    t.skip('to be fixed')
+    await t.skip('to be fixed')
     // t.doesNotThrow(() => validatePlugin(plugin), 'plugin ' + plugin.name + ' should be valid')
   }
 })
