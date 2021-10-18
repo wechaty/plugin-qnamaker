@@ -8,11 +8,11 @@ import {
   matchers,
 }                   from 'wechaty-plugin-contrib'
 
-import { asker }            from './asker'
-import { normalizeConfig }  from './normalize-config'
-import { mentionMatcher }        from './mention-matcher'
+import { asker }            from './asker.js'
+import { normalizeConfig }  from './normalize-config.js'
+import { mentionMatcher }        from './mention-matcher.js'
 
-import { QnAMakerOptions } from './qnamaker'
+import type { QnAMakerOptions } from './qnamaker.js'
 
 interface WechatyQnAMakerConfigMatcher {
   contact?        : matchers.ContactMatcherOptions,
@@ -111,7 +111,7 @@ function WechatyQnAMaker (config: WechatyQnAMakerConfig): WechatyPlugin {
       if (!text) { return }
 
       const answers = await ask(text)
-      if (answers.length <= 0) { return }
+      if (answers.length <= 0 || !answers[0]) { return }
 
       const answer = answers[0].answer
       if (!answer) {

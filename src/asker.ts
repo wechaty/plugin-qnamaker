@@ -10,8 +10,9 @@ import * as runtime from '@azure/cognitiveservices-qnamaker-runtime'
 
 import { log } from 'wechaty'
 
-import { QnAMakerOptions } from './qnamaker'
-import { QueryDTO } from '@azure/cognitiveservices-qnamaker-runtime/esm/models'
+import type { QnAMakerOptions } from './qnamaker.js'
+// eslint-disable-next-line import/extensions
+import type { QueryDTO } from '@azure/cognitiveservices-qnamaker-runtime/esm/models'
 
 function asker (options: QnAMakerOptions) {
   log.verbose('WechatyQnAMaker', 'asker(%s)', JSON.stringify(options))
@@ -41,7 +42,7 @@ function asker (options: QnAMakerOptions) {
     const requestQuery = await runtimeClient.runtime.generateAnswer(
       options.knowledgeBaseId,
       normalizedQueryDto,
-      { customHeaders }
+      { customHeaders },
     )
     // console.info(JSON.stringify(requestQuery))
 

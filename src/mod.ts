@@ -1,8 +1,10 @@
-export { VERSION } from './version'
+export { VERSION } from './version.js'
+export type {
+  WechatyQnAMakerConfig,
+}                           from './plugin.js'
 export {
   WechatyQnAMaker,
-  WechatyQnAMakerConfig,
-}                           from './plugin'
+}                           from './plugin.js'
 export {
   Faq,
-}                           from './vorpal'
+}                           from './vorpal.js'
