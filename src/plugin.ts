@@ -3,6 +3,7 @@ import {
   WechatyPlugin,
   log,
   Message,
+  type,
 }                   from 'wechaty'
 import {
   matchers,
@@ -52,7 +53,7 @@ function WechatyQnAMaker (config: WechatyQnAMakerConfig): WechatyPlugin {
 
   const isPluginMessage = async (message: Message): Promise<boolean> => {
     if (message.self())                       { return false }
-    if (message.type() !== Message.Type.Text) { return false }
+    if (message.type() !== type.Message.Text) { return false }
 
     const mentionList = await message.mentionList()
     if (mentionList.length > 0) {
@@ -94,7 +95,7 @@ function WechatyQnAMaker (config: WechatyQnAMakerConfig): WechatyPlugin {
   return function WechatyQnAMakerPlugin (wechaty: Wechaty) {
     log.verbose('WechatyQnAMaker', 'WechatyQnAMakerPlugin(%s)', wechaty)
 
-    wechaty.on('message', async message => {
+    const onMessage = async (message: Message) => {
       log.verbose('WechatyQnAMaker', 'WechatyQnAMakerPlugin() wechaty.on(message) %s', message)
 
       if (!await isPluginMessage(message)) {
@@ -127,8 +128,12 @@ function WechatyQnAMaker (config: WechatyQnAMakerConfig): WechatyPlugin {
         await message.say(answer)
       }
 
-    })
+    }
 
+    wechaty.on('message', onMessage)
+
+    const uninstaller = () => { wechaty.off('message', onMessage) }
+    return uninstaller
   }
 }
 
