@@ -1,6 +1,6 @@
 {
   "name": "wechaty-qnamaker",
-  "version": "0.7.2",
+  "version": "1.0.0",
   "description": "QnAMaker.ai Plugin for Wechaty",
   "type": "module",
   "exports": {
@@ -18,7 +18,7 @@
     "@azure/cognitiveservices-qnamaker-runtime": "^1.0.1",
     "@azure/ms-rest-js": "^2.6.0",
     "language-monitor": "^1.0.3",
-    "wechaty-plugin-contrib": "^0.19.4"
+    "wechaty-plugin-contrib": "^1"
   },
   "devDependencies": {
     "@chatie/eslint-config": "^0.16.2",

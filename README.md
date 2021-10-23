@@ -137,9 +137,11 @@ Our Friday BOT are using `wechaty-qnamaker` to connect our WeChat conversations 
 
 ## HISTORY
 
-### master v0.7 (Oct 2022)
+### master v1.0 (Oct 23, 2021)
 
-1. Enable ESM module
+Release v1.0
+
+1. v0.7 (Oct 2022): Enable ESM module
 
 ### v0.6 (Aut 5, 2020)
 
