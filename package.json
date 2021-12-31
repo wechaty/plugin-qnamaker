@@ -1,6 +1,6 @@
 {
   "name": "wechaty-qnamaker",
-  "version": "1.0.2",
+  "version": "1.11.0",
   "description": "QnAMaker.ai Plugin for Wechaty",
   "type": "module",
   "exports": {
@@ -21,18 +21,18 @@
     "wechaty-plugin-contrib": "^1"
   },
   "devDependencies": {
-    "@chatie/eslint-config": "^1.0.2",
+    "@chatie/eslint-config": "^1.0.4",
     "@chatie/git-scripts": "^0.6.2",
     "@chatie/semver": "^0.4.7",
-    "@chatie/tsconfig": "^0.20.6",
-    "@types/body-parser": "^1.19.1",
+    "@chatie/tsconfig": "^4.6.2",
+    "@types/body-parser": "^1.19.2",
     "@types/express": "^4.17.13",
     "pkg-jq": "^0.2.11",
     "shx": "^0.3.3",
-    "tstest": "^0.7.3",
-    "wechaty": "^0.77.20",
-    "wechaty-puppet-mock": "^0.35.8",
-    "wechaty-vorpal": "1.0.3"
+    "tstest": "^1.0.1",
+    "wechaty": "^1.11.28",
+    "wechaty-puppet-mock": "^1.11.11",
+    "wechaty-vorpal": "^1.11.4"
   },
   "scripts": {
     "build": "tsc && tsc -p tsconfig.cjs.json",

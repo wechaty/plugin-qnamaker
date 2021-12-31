@@ -3,7 +3,7 @@ import {
   WechatyPlugin,
   log,
   Message,
-  type,
+  types,
 }                   from 'wechaty'
 import {
   matchers,
@@ -53,7 +53,7 @@ function WechatyQnAMaker (config: WechatyQnAMakerConfig): WechatyPlugin {
 
   const isPluginMessage = async (message: Message): Promise<boolean> => {
     if (message.self())                       { return false }
-    if (message.type() !== type.Message.Text) { return false }
+    if (message.type() !== types.Message.Text) { return false }
 
     const mentionList = await message.mentionList()
     if (mentionList.length > 0) {
